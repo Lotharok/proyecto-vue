@@ -9,7 +9,8 @@
       "build": "pnpm -r build",
       "builddev": "pnpm -r builddev",
       "lint": "eslint .",
-      "format": "prettier --write ."
+      "format": "prettier --write .",
+      "plop": "plop"
    },
    "devDependencies": {
       "@eslint/eslintrc": "^3.3.1",
