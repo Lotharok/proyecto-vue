@@ -11,14 +11,6 @@ export interface Params {
     };
  }
  
- export interface ConfigEnv {
-    UseMocks: boolean;
-    IsDebug: boolean;
-    I18Path: string;
-    I18Version: string;
-    ApiUrl: string;
- }
- 
  declare global {
     interface Window {
        __params: Params;
