@@ -214,7 +214,6 @@ module.exports = function (plop) {
          (data) =>
             `✅ Librería Vue "${data.name}" creada exitosamente!\n\n` +
             `📁 Ubicación: packages/${data.name}/\n` +
-            `🔧 Para desarrollar: cd packages/${data.name} && pnpm dev\n` +
             `📦 Para construir: cd packages/${data.name} && pnpm build`,
       ],
    });
@@ -252,7 +251,6 @@ module.exports = function (plop) {
          (data) =>
             `✅ Librería de utilidades "${data.name}" creada exitosamente!\n\n` +
             `📁 Ubicación: packages/${data.name}/\n` +
-            `🔧 Para desarrollar: cd packages/${data.name} && pnpm dev\n` +
             `📦 Para construir: cd packages/${data.name} && pnpm build`,
       ],
    });
