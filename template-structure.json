@@ -47,25 +47,20 @@
       },
       "libreria-vue": {
          "archivos": [
-            "src/index.ts.hbs",
             "src/i18n.ts.hbs",
+            "src/index.ts.hbs",
             "package.json.hbs",
             "tsconfig.json.hbs",
-            "vite.config.ts.hbs",
-            "package.json.hbs"
+            "vite.config.ts.hbs"
          ]
       },
       "libreria-utils": {
          "archivos": [
+            "services/guid-generator/guidGenerator.ts.hbs",
+            "src/index.ts.hbs",
             "package.json.hbs",
             "tsconfig.json.hbs",
-            "vite.config.ts.hbs",
-            ".gitignore.hbs",
-            "README.md.hbs",
-            "src/index.ts.hbs",
-            "src/utils/index.ts.hbs",
-            "src/utils/helpers.ts.hbs",
-            "src/types/index.ts.hbs"
+            "vite.config.ts.hbs"
          ]
       }
    }

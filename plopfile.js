@@ -209,7 +209,7 @@ module.exports = function (plop) {
             type: "modify",
             path: "package.json",
             pattern: /("scripts": {[^}]*)/,
-            template: '$1,\n "lib-{{kebabCase name}}": "pnpm --filter {{kebabCase name}}"',
+            template: '$1,\n    "lib-{{kebabCase name}}": "pnpm --filter {{kebabCase name}}"',
          },
          (data) =>
             `✅ Librería Vue "${data.name}" creada exitosamente!\n\n` +
@@ -234,17 +234,6 @@ module.exports = function (plop) {
             message: "Descripción de la librería:",
             validate: validateDescription,
          },
-         {
-            type: "list",
-            name: "buildTarget",
-            message: "Target de construcción:",
-            choices: [
-               { name: "ES2020 (Moderno)", value: "es2020" },
-               { name: "ES2018 (Compatibilidad)", value: "es2018" },
-               { name: "ES2015 (Legacy)", value: "es2015" },
-            ],
-            default: "es2020",
-         },
       ],
       actions: [
          {
@@ -253,6 +242,12 @@ module.exports = function (plop) {
             templateFiles: "plop-templates/libreria-utils/**/*",
             base: "plop-templates/libreria-utils",
             globOptions: { dot: true },
+         },
+         {
+            type: "modify",
+            path: "package.json",
+            pattern: /("scripts": {[^}]*)/,
+            template: '$1,\n    "lib-{{kebabCase name}}": "pnpm --filter {{kebabCase name}}"',
          },
          (data) =>
             `✅ Librería de utilidades "${data.name}" creada exitosamente!\n\n` +
