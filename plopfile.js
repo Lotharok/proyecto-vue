@@ -205,6 +205,12 @@ module.exports = function (plop) {
             base: "plop-templates/libreria-vue",
             globOptions: { dot: true },
          },
+         {
+            type: "modify",
+            path: "package.json",
+            pattern: /("scripts": {[^}]*)/,
+            template: '$1,\n "lib-{{kebabCase name}}": "pnpm --filter {{kebabCase name}}"',
+         },
          (data) =>
             `✅ Librería Vue "${data.name}" creada exitosamente!\n\n` +
             `📁 Ubicación: packages/${data.name}/\n` +

@@ -1,5 +1,5 @@
 {
-   "name": "@pnpmworkspace/vue-utils",
+   "name": "@pnpmworkspace/{{kebabCase name}}",
    "private": true,
    "version": "0.0.0",
    "type": "module",
@@ -16,17 +16,24 @@
       "dist"
    ],
    "scripts": {
+      "dev": "npm run format && npm run lint && vite build --watch",
       "build": "npm run format && npm run lint && vue-tsc -b && vite build",
       "builddev": "npm run format && npm run lint && vue-tsc -b && vite build --mode development",
       "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
       "format": "prettier --write ."
    },
-   "dependencies": {},
+   "dependencies": {
+      "@pnpmworkspace/types": "workspace:*"
+   },
    "peerDependencies": {
-      "@pnpmworkspace/types": "workspace:*",
+      {{#if usesI18n}}
       "i18next": "catalog:",
       "i18next-http-backend": "catalog:",
       "i18next-vue": "catalog:",
+      {{/if}}
+      {{#if usesPinia}}
+      "pinia": "catalog:",
+      {{/if}}
       "vue": "catalog:"
    }
 }

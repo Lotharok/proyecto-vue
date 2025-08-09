@@ -3,9 +3,9 @@
    "private": true,
    "scripts": {
       "app-list": "pnpm --filter list",
-      "utils": "pnpm --filter utils",
-      "vue-utils": "pnpm --filter vue-utils",
-      "types": "pnpm --filter types",
+      "lib-utils": "pnpm --filter utils",
+      "lib-vue-utils": "pnpm --filter vue-utils",
+      "lib-types": "pnpm --filter types",
       "build": "pnpm -r build",
       "builddev": "pnpm -r builddev",
       "lint": "eslint .",
