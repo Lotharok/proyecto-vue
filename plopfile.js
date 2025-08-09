@@ -128,9 +128,15 @@ module.exports = function (plop) {
          },
          {
             type: "input",
-            name: "apiEndpoint",
-            message: "Endpoint base del API:",
-            default: "https://api.domain.com/api",
+            name: "cdnTestUrl",
+            message: "URL del CDN de pruebas (opcional):",
+            default: "https://test-b2b2c.cdnpt.com",
+         },
+         {
+            type: "input",
+            name: "cdnUrl",
+            message: "URL del CDN de producción (opcional):",
+            default: "https://b2b2c.cdnpt.com",
          },
       ],
       actions: [

@@ -1,0 +1,22 @@
+import { i18n } from "@pnpmworkspace/vue-utils";
+import { createPinia } from "pinia";
+import { createApp } from "vue";
+
+import App from "@/App.vue";
+import { configEnv } from "@/config.env";
+
+(async () => {
+   const app = await i18n(
+      createApp(App),
+      configEnv.I18Path,
+      configEnv.I18Version,
+      configEnv.IsDebug,
+   );
+
+   const pinia = createPinia();
+
+   app.provide("configEnv", configEnv);
+
+   app.use(pinia);
+   app.mount("#main");
+})();
