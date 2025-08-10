@@ -1,0 +1,67 @@
+{
+   "estructura": "plop-templates/",
+   "descripcion": "Estructura completa de templates para el sistema de scaffolding",
+   "carpetas": {
+      "microfrontend-integrado": {
+         "archivos": [
+            "public/locales/en-US/translation.json.hbs",
+            "public/locales/es-MX/translation.json.hbs",
+            "src/components/ProductList.vue.hbs",
+            "src/stores/productStore.ts.hbs",
+            "src/App.vue.hbs",
+            "src/config.env.ts.hbs",
+            "src/config.window.ts.hbs",
+            "src/global.ts.hbs",
+            "src/main.ts.hbs",
+            "src/vite-env.d.ts.hbs",
+            ".env.development.hbs",
+            ".env.production.hbs",
+            "index.html.hbs",
+            "package.json.hbs",
+            "tsconfig.app.json.hbs",
+            "tsconfig.json.hbs",
+            "tsconfig.node.json.hbs",
+            "vite.config.ts.hbs"
+         ]
+      },
+      "microfrontend-independiente": {
+         "archivos": [
+            "public/locales/en-US/translation.json.hbs",
+            "public/locales/es-MX/translation.json.hbs",
+            "src/components/ProductList.vue.hbs",
+            "src/stores/productStore.ts.hbs",
+            "src/App.vue.hbs",
+            "src/config.env.ts.hbs",
+            "src/global.ts.hbs",
+            "src/main.ts.hbs",
+            "src/vite-env.d.ts.hbs",
+            ".env.development.hbs",
+            ".env.production.hbs",
+            "index.html.hbs",
+            "package.json.hbs",
+            "tsconfig.app.json.hbs",
+            "tsconfig.json.hbs",
+            "tsconfig.node.json.hbs",
+            "vite.config.ts.hbs"
+         ]
+      },
+      "libreria-vue": {
+         "archivos": [
+            "src/i18n.ts.hbs",
+            "src/index.ts.hbs",
+            "package.json.hbs",
+            "tsconfig.json.hbs",
+            "vite.config.ts.hbs"
+         ]
+      },
+      "libreria-utils": {
+         "archivos": [
+            "services/guid-generator/guidGenerator.ts.hbs",
+            "src/index.ts.hbs",
+            "package.json.hbs",
+            "tsconfig.json.hbs",
+            "vite.config.ts.hbs"
+         ]
+      }
+   }
+}

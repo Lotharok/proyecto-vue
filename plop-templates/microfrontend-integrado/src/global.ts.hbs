@@ -1,0 +1,18 @@
+export interface Params {
+    productData: {
+       categoryId: string;
+       filters: Record<string, string>;
+    };
+    config: {
+       baseUrl: string;
+       currency: string;
+       language: string;
+       apiUrl: string;
+    };
+ }
+ 
+ declare global {
+    interface Window {
+       __params: Params;
+    }
+ }

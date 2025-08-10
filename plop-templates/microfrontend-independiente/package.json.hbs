@@ -1,0 +1,22 @@
+{
+  "name": "{{kebabCase name}}",
+  "version": "1.0.0",
+  "description": "{{description}}",
+  "type": "module",
+    "scripts": {
+       "dev": "npm run format && npm run lint && vite --host",
+       "build": "npm run lint && vue-tsc -b && vite build",
+       "builddev": "npm run lint && vue-tsc -b && vite build --mode development",
+       "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+       "format": "prettier --write ."
+    },
+    "dependencies": {
+       "vue": "catalog:",
+       "pinia": "catalog:",
+       "i18next": "catalog:",
+       "i18next-vue": "catalog:",
+       "@pnpmworkspace/types": "workspace:*",
+       "@pnpmworkspace/vue-utils": "workspace:*"
+    },
+    "devDependencies": {}
+}

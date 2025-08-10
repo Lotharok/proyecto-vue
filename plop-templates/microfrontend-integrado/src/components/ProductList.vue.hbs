@@ -1,0 +1,178 @@
+<script setup lang="ts">
+import { storeToRefs } from "pinia";
+
+import { useProductStore } from "@/stores/productStore";
+
+const productStore = useProductStore();
+const { isLoading, formattedProducts, error } = storeToRefs(productStore);
+</script>
+
+<template>
+   <div class="product-list">
+      <h2>\{{ $t("products.title") }}</h2>
+
+      <!-- Loading state -->
+      <div
+         v-if="isLoading"
+         class="loading"
+         aria-live="polite"
+      >
+         <div class="spinner"></div>
+         \{{ $t("common.loading") }}...
+      </div>
+
+      <!-- Error state -->
+      <div
+         v-else-if="error"
+         class="error"
+         role="alert"
+      >
+         \{{ $t("common.error") }}: {{ error }}
+         <button
+            class="retry-btn"
+            @click="productStore.fetchProducts()"
+         >
+            \{{ $t("common.retry") }}
+         </button>
+      </div>
+
+      <!-- Products grid -->
+      <div
+         v-else
+         class="products-grid"
+      >
+         <article
+            v-for="product in formattedProducts"
+            :key="product.id"
+            class="product-card"
+         >
+            <img
+               :src="product.imageUrl"
+               :alt="product.name"
+               loading="lazy"
+            />
+            <h3>\{{ product.name }}</h3>
+            <p class="price">\{{ product.displayPrice }}</p>
+            <button class="add-to-cart">
+               \{{ $t("products.addToCart") }}
+            </button>
+         </article>
+      </div>
+   </div>
+</template>
+
+<style scoped>
+.product-list {
+   padding: 1rem;
+   max-width: 1200px;
+   margin: 0 auto;
+}
+
+.products-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+   gap: 1.5rem;
+   margin-top: 1.5rem;
+}
+
+.product-card {
+   border: 1px solid #e0e0e0;
+   border-radius: 12px;
+   padding: 1.25rem;
+   text-align: center;
+   transition: box-shadow 0.3s ease;
+   background: white;
+}
+
+.product-card:hover {
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+   width: 100%;
+   height: 180px;
+   object-fit: cover;
+   border-radius: 8px;
+   margin-bottom: 1rem;
+}
+
+.product-card h3 {
+   margin: 0.5rem 0;
+   font-size: 1.1rem;
+   color: #333;
+}
+
+.price {
+   font-weight: bold;
+   color: #2c5aa0;
+   font-size: 1.3rem;
+   margin: 0.75rem 0;
+}
+
+.add-to-cart {
+   background: #2c5aa0;
+   color: white;
+   border: none;
+   padding: 0.75rem 1.5rem;
+   border-radius: 6px;
+   cursor: pointer;
+   font-size: 0.9rem;
+   transition: background-color 0.2s;
+   width: 100%;
+}
+
+.add-to-cart:hover {
+   background: #1e3d6f;
+}
+
+.loading {
+   text-align: center;
+   padding: 3rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1rem;
+   color: #666;
+}
+
+.spinner {
+   width: 32px;
+   height: 32px;
+   border: 3px solid #f3f3f3;
+   border-top: 3px solid #2c5aa0;
+   border-radius: 50%;
+   animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+   0% {
+      transform: rotate(0deg);
+   }
+   100% {
+      transform: rotate(360deg);
+   }
+}
+
+.error {
+   text-align: center;
+   padding: 2rem;
+   color: #d73502;
+   background: #ffeaea;
+   border-radius: 8px;
+   margin: 1rem 0;
+}
+
+.retry-btn {
+   background: #d73502;
+   color: white;
+   border: none;
+   padding: 0.5rem 1rem;
+   border-radius: 4px;
+   cursor: pointer;
+   margin-top: 1rem;
+}
+
+.retry-btn:hover {
+   background: #b52d02;
+}
+</style>

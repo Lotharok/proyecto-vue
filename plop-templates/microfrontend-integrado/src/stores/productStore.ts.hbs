@@ -1,0 +1,87 @@
+import type { ConfigEnv } from "@pnpmworkspace/types";
+import { defineStore } from "pinia";
+import { inject } from "vue";
+
+import type { Params } from "@/global";
+
+interface Product {
+   id: string;
+   name: string;
+   price: number;
+   currency: string;
+   imageUrl: string;
+}
+
+interface StoreState {
+   // Configuración inyectada
+   data: Params | null;
+   configEnv: ConfigEnv;
+
+   // Estados de loading
+   isLoading: boolean;
+
+   // Datos de negocio
+   products: Product[];
+   error: string | null;
+}
+
+export const useProductStore = defineStore("products", {
+   state: (): StoreState => ({
+      data: inject("configWindow") as Params | null,
+      configEnv: inject("configEnv") as ConfigEnv,
+
+      isLoading: false,
+      products: [],
+      error: null,
+   }),
+
+   getters: {
+      currency: (state): string => state.data?.config.currency ?? "USD",
+      categoryId: (state): string => state.data?.productData.categoryId ?? "",
+
+      formattedProducts: (state): Array<Product & { displayPrice: string }> => {
+         return state.products.map((product) => ({
+            ...product,
+            displayPrice: `${product.price} ${state.data?.config.currency}`,
+         }));
+      },
+   },
+
+   actions: {
+      async fetchProducts(): Promise<void> {
+         this.isLoading = true;
+         this.error = null;
+
+         try {
+            // Simulación de API call
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            // Mock data basado en configuración del host
+            this.products = [
+               {
+                  id: "1",
+                  name: `Product 1 - ${this.categoryId}`,
+                  price: 29.99,
+                  currency: this.currency,
+                  imageUrl: "https://picsum.photos/seed/picsum/150/150",
+               },
+               {
+                  id: "2",
+                  name: `Product 2 - ${this.categoryId}`,
+                  price: 49.99,
+                  currency: this.currency,
+                  imageUrl: "https://picsum.photos/seed/picsum/150/150",
+               },
+            ];
+         } catch (error) {
+            this.error = error instanceof Error ? error.message : "Unknown error";
+         } finally {
+            this.isLoading = false;
+         }
+      },
+
+      async initialize(): Promise<void> {
+         await this.fetchProducts();
+      },
+   },
+});

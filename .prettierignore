@@ -1,0 +1,12 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+plop-templates
+
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
+**/.git
+**/node_modules
+**/dist

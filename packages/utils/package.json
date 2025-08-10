@@ -1,5 +1,5 @@
 {
-   "name": "@pnpmworkspace/vue-utils",
+   "name": "@pnpmworkspace/utils",
    "private": true,
    "version": "0.0.0",
    "type": "module",
@@ -10,23 +10,23 @@
       ".": {
          "import": "./dist/index.js",
          "types": "./dist/index.d.ts"
+      },
+      "./http": {
+         "import": "./dist/services/http/index.js",
+         "types": "./dist/services/http/index.d.ts"
       }
    },
    "files": [
       "dist"
    ],
    "scripts": {
-      "build": "npm run format && npm run lint && vue-tsc -b && vite build",
-      "builddev": "npm run format && npm run lint && vue-tsc -b && vite build --mode development",
+      "build": "npm run format && npm run lint && tsc -b && vite build",
+      "builddev": "npm run format && npm run lint && tsc -b && vite build --mode development",
       "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
       "format": "prettier --write ."
    },
    "dependencies": {},
-   "peerDependencies": {
-      "@pnpmworkspace/types": "workspace:*",
-      "i18next": "catalog:",
-      "i18next-http-backend": "catalog:",
-      "i18next-vue": "catalog:",
-      "vue": "catalog:"
+   "devDependencies": {
+      "typescript": "catalog:"
    }
 }
