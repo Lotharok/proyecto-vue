@@ -41,6 +41,22 @@ export default [
 
       settings: {},
 
-      rules: { "simple-import-sort/imports": "error", "simple-import-sort/exports": "error", "vue/no-v-html": "off" },
+      rules: {
+         "simple-import-sort/imports": "error",
+         "simple-import-sort/exports": "error",
+         "linebreak-style": ["error", "unix"],
+         "no-unused-vars": [
+            "error",
+            {
+               argsIgnorePattern: "^_",
+            },
+         ],
+         "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+               argsIgnorePattern: "^_",
+            },
+         ],
+      },
    },
 ];
