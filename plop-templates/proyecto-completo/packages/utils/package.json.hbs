@@ -1,0 +1,28 @@
+{
+   "name": "@pnpmworkspace/utils",
+   "private": true,
+   "version": "0.0.0",
+   "type": "module",
+   "main": "./dist/index.js",
+   "module": "./dist/index.js",
+   "types": "./dist/index.d.ts",
+   "exports": {
+      ".": {
+         "import": "./dist/index.js",
+         "types": "./dist/index.d.ts"
+      }
+   },
+   "files": [
+      "dist"
+   ],
+   "scripts": {
+      "build": "npm run format && npm run lint && tsc -b && vite build",
+      "builddev": "npm run format && npm run lint && tsc -b && vite build --mode development",
+      "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+      "format": "prettier --write ."
+   },
+   "dependencies": {},
+   "devDependencies": {
+      "typescript": "catalog:"
+   }
+}

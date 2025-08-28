@@ -15,8 +15,6 @@ export default defineConfig({
             "i18next",
             "i18next-vue",
             "i18next-http-backend",
-            "@pnpmworkspace/types",
-            "@pnpmworkspace/utils",
          ],
          output: {
             preserveModules: true,

@@ -1,0 +1,109 @@
+# {{projectName}}
+
+{{description}}
+
+## 🚀 Quick Start
+
+```bash
+# Instalar dependencias
+pnpm install
+
+# Build inicial de packages
+pnpm build
+
+# Generar nuevo microfrontend/librería
+npx plop
+```
+
+## 📁 Estructura del Proyecto
+
+```
+{{kebabCase projectName}}/
+├── @apps/                    # Microfrontends
+├── packages/                 # Librerías compartidas
+{{#if includeTypes}}
+│   ├── types/               # Tipos TypeScript compartidos
+{{/if}}
+{{#if includeUtils}}
+│   ├── utils/               # Utilidades generales (sin Vue)
+{{/if}}
+│   └── vue-utils/           # Utilidades específicas de Vue
+├── pnpm-workspace.yaml      # Configuración del monorepo
+└── package.json             # Scripts del workspace
+```
+
+## 💻 Comandos Disponibles
+
+### Scripts del Workspace
+
+```bash
+# Build todos los proyectos
+pnpm build
+
+# Build en modo desarrollo (con sourcemaps)
+pnpm builddev
+
+# Linting de todo el workspace
+pnpm lint
+
+# Formateo de código
+pnpm format
+```
+
+### Scripts por Package
+
+```bash
+{{#if includeTypes}}
+# Package types
+pnpm lib-types build
+pnpm lib-types lint
+
+{{/if}}
+{{#if includeUtils}}
+# Package utils  
+pnpm lib-utils build
+pnpm lib-utils dev
+
+{{/if}}
+# Package vue-utils
+pnpm lib-vue-utils build  
+pnpm lib-vue-utils dev
+```
+
+### Desarrollo de Microfrontends
+
+```bash
+# Crear nuevo microfrontend
+npx plop
+# Seleccionar: microfrontend-integrado o microfrontend-independiente
+
+# Agregar script al package.json para cada nuevo microfrontend:
+# "app-{nombre}": "pnpm --filter {nombre}"
+
+# Desarrollo
+pnpm app-{nombre} dev
+
+# Build
+pnpm app-{nombre} build
+```
+
+## 🏗️ Arquitectura
+
+### Microfrontends
+- **Integrados**: Se ejecutan dentro de aplicaciones ASP.NET existentes
+- **Independientes**: SPAs completas autónomas
+
+### Packages Compartidos
+{{#if includeTypes}}
+- **types**: Tipos TypeScript reutilizables
+{{/if}}
+{{#if includeUtils}}
+- **utils**: Funciones puras sin dependencias de Vue  
+{{/if}}
+- **vue-utils**: Utilidades específicas de Vue (composables, helpers)
+
+## 👥 Equipo: {{teamName}}
+
+## 📚 Más Información
+
+Para documentación completa sobre patrones, arquitectura y mejores prácticas, consultar la documentación técnica del equipo.
