@@ -12,16 +12,9 @@ export default defineConfig({
       rollupOptions: {
          external: [
             "vue",
-            {{#if usesI18n}}
             "i18next",
             "i18next-vue",
             "i18next-http-backend",
-            {{/if}}
-            {{#if usesPinia}}
-            "pinia",
-            {{/if}}
-            "@pnpmworkspace/types",
-            "@pnpmworkspace/utils",
          ],
          output: {
             preserveModules: true,

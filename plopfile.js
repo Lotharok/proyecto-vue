@@ -254,4 +254,178 @@ module.exports = function (plop) {
             `📦 Para construir: cd packages/${data.name} && pnpm build`,
       ],
    });
+
+   plop.setGenerator("proyecto-completo", {
+      description: "🏗️ Crear workspace Vue.js completo desde cero",
+      prompts: [
+         {
+            type: "input",
+            name: "projectName",
+            message: "Nombre del proyecto/workspace (kebab-case):",
+            default: "mi-proyecto-vue",
+            validate: function (value) {
+               if (!value || value.length < 2) {
+                  return "El nombre debe tener al menos 2 caracteres";
+               }
+               if (!/^[a-z][a-z0-9-]*$/.test(value)) {
+                  return "Use formato kebab-case (solo minúsculas, números y guiones)";
+               }
+               return true;
+            },
+         },
+         {
+            type: "input",
+            name: "description",
+            message: "Descripción del proyecto:",
+            default: function (answers) {
+               return `Workspace de microfrontends Vue.js 3 + TypeScript para ${answers.projectName}`;
+            },
+         },
+         {
+            type: "input",
+            name: "teamName",
+            message: "Nombre del equipo:",
+            default: "Frontend Team",
+         },
+         {
+            type: "confirm",
+            name: "includeTypes",
+            message: "¿Incluir package de tipos TypeScript compartidos?",
+            default: true,
+         },
+         {
+            type: "confirm",
+            name: "includeUtils",
+            message: "¿Incluir package de utilidades generales (sin Vue)?",
+            default: true,
+         },
+      ],
+      actions: function (data) {
+         let actions = [];
+
+         // 1. Archivos de configuración raíz
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/package.json",
+            templateFile: "plop-templates/proyecto-completo/package.json.hbs",
+         });
+
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/pnpm-workspace.yaml",
+            templateFile: "plop-templates/proyecto-completo/pnpm-workspace.yaml.hbs",
+         });
+
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/.gitignore",
+            templateFile: "plop-templates/proyecto-completo/.gitignore.hbs",
+         });
+
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/.gitattributes",
+            templateFile: "plop-templates/proyecto-completo/.gitattributes.hbs",
+         });
+
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/README.md",
+            templateFile: "plop-templates/proyecto-completo/README.md.hbs",
+         });
+
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/eslint.config.mjs",
+            templateFile: "plop-templates/proyecto-completo/eslint.config.mjs.hbs",
+         });
+
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/.prettierrc.json",
+            templateFile: "plop-templates/proyecto-completo/.prettierrc.json.hbs",
+         });
+
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/.prettierignore",
+            templateFile: "plop-templates/proyecto-completo/.prettierignore.hbs",
+         });
+
+         // 2. Estructura de carpetas
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/@apps/.gitkeep",
+            templateFile: "plop-templates/proyecto-completo/@apps/.gitkeep.hbs",
+         });
+
+         // 3. Package vue-utils (siempre incluido)
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/packages/vue-utils/package.json",
+            templateFile: "plop-templates/proyecto-completo/packages/vue-utils/package.json.hbs",
+         });
+
+         actions.push({
+            type: "addMany",
+            destination: "{{kebabCase projectName}}/packages/vue-utils/",
+            base: "plop-templates/proyecto-completo/packages/vue-utils/",
+            templateFiles: "plop-templates/proyecto-completo/packages/vue-utils/**/*",
+            globOptions: { dot: true, ignore: ["**/package.json.hbs"] },
+         });
+
+         // 4. Package types (condicional)
+         if (data.includeTypes) {
+            actions.push({
+               type: "add",
+               path: "{{kebabCase projectName}}/packages/types/package.json",
+               templateFile: "plop-templates/proyecto-completo/packages/types/package.json.hbs",
+            });
+
+            actions.push({
+               type: "addMany",
+               destination: "{{kebabCase projectName}}/packages/types/",
+               base: "plop-templates/proyecto-completo/packages/types/",
+               templateFiles: "plop-templates/proyecto-completo/packages/types/**/*",
+               globOptions: { dot: true, ignore: ["**/package.json.hbs"] },
+            });
+         }
+
+         // 5. Package utils (condicional)
+         if (data.includeUtils) {
+            actions.push({
+               type: "add",
+               path: "{{kebabCase projectName}}/packages/utils/package.json",
+               templateFile: "plop-templates/proyecto-completo/packages/utils/package.json.hbs",
+            });
+
+            actions.push({
+               type: "addMany",
+               destination: "{{kebabCase projectName}}/packages/utils/",
+               base: "plop-templates/proyecto-completo/packages/utils/",
+               templateFiles: "plop-templates/proyecto-completo/packages/utils/**/*",
+               globOptions: { dot: true, ignore: ["**/package.json.hbs"] },
+            });
+         }
+
+         // 6. Mensaje de éxito personalizado
+         actions.push(function (answers) {
+            const projectPath = `./${plop.renderString("{{kebabCase projectName}}", answers)}/`;
+
+            console.log("\n🎉 ¡Workspace generado exitosamente!");
+            console.log("📁 Ubicación:", projectPath);
+            console.log("\n📋 Próximos pasos:");
+            console.log("1. Copiar contenido a tu nuevo repositorio:");
+            console.log(`cp -r ${projectPath}* /ruta/a/tu/nuevo/repo/`);
+            console.log(`# O en Windows: xcopy /E /I ${projectPath}* C:\\ruta\\a\\tu\\nuevo\\repo\\`);
+            console.log("2. cd /ruta/a/tu/nuevo/repo");
+            console.log("3. pnpm install");
+            console.log("4. pnpm build");
+            console.log("\n💡 El workspace está listo para usar!");
+            return "Generación completada";
+         });
+
+         return actions;
+      },
+   });
 };
