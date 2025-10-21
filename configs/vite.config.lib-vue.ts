@@ -4,8 +4,12 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
 /**
- * Configuración de Vite para librería Vue
- * Generado con plop - Template: libreria-vue
+ * Template de Vite para librerías Vue
+ *
+ * Uso:
+ * 1. Copia este archivo a tu paquete: packages/my-vue-lib/vite.config.ts
+ * 2. Ajusta el campo 'external' según tus peerDependencies
+ * 3. Cambia el 'entry' si tienes múltiples puntos de entrada
  */
 export default defineConfig({
    build: {
@@ -25,20 +29,12 @@ export default defineConfig({
                return true;
             }
 
-            {{#if usesI18n}}
-            // i18next
-            if (id === "i18next" || id.startsWith("i18next/")) return true;
-            if (id === "i18next-vue" || id.startsWith("i18next-vue/")) return true;
-            if (id === "i18next-http-backend" || id.startsWith("i18next-http-backend/")) return true;
-            {{/if}}
-
-            {{#if usesPinia}}
-            // Pinia
-            if (id === "pinia" || id.startsWith("pinia/")) return true;
-            {{/if}}
-
-            // Paquetes del monorepo
-            if (id.startsWith("@pnpmworkspace/")) return true;
+            // Agrega aquí tus otras peerDependencies
+            // Ejemplos comunes:
+            // if (id === "pinia" || id.startsWith("pinia/")) return true;
+            // if (id === "vue-router" || id.startsWith("vue-router/")) return true;
+            // if (id === "i18next-vue" || id.startsWith("i18next-vue/")) return true;
+            // if (id === "@pnpmworkspace/types" || id.startsWith("@pnpmworkspace/types/")) return true;
 
             return false;
          },
@@ -88,6 +84,7 @@ export default defineConfig({
          exclude: ["**/*.test.ts", "**/*.spec.ts", "**/*.story.vue", "src/test-utils/**/*"],
 
          // rollupTypes: false para mejor tree-shaking
+         // Los tipos se preservan en la misma estructura que los archivos JS
          rollupTypes: false,
 
          // Genera entry point de tipos

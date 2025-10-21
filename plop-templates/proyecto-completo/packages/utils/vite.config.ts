@@ -11,12 +11,19 @@ export default defineConfig({
          formats: ["es"],
       },
       rollupOptions: {
+         // Externaliza peerDependencies si las necesitas
+         external: (_id) => {
+            // Agrega aquí tus peerDependencies
+            // Ejemplo: if (_id === "lodash") return true;
+            return false;
+         },
          output: {
             preserveModules: true,
             preserveModulesRoot: "src",
             entryFileNames: "[name].js",
          },
       },
+      sourcemap: true,
       minify: process.env.NODE_ENV === "production",
    },
    plugins: [
@@ -25,7 +32,7 @@ export default defineConfig({
          exclude: ["**/*.test.ts", "**/*.spec.ts", "src/test-utils/**/*"],
          insertTypesEntry: true,
          copyDtsFiles: true,
-         rollupTypes: true,
+         rollupTypes: false,
       }),
    ],
    resolve: {

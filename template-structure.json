@@ -1,8 +1,50 @@
 {
    "estructura": "plop-templates/",
    "descripcion": "Estructura completa de templates para el sistema de scaffolding",
+   "version": "2.0.0",
+   "ultimaActualizacion": "2025-10-20",
    "carpetas": {
+      "proyecto-completo": {
+         "descripcion": "Workspace Vue.js completo con monorepo, Turborepo, pnpm y TypeScript",
+         "archivos": [
+            "package.json.hbs",
+            "pnpm-workspace.yaml.hbs",
+            "turbo.json.hbs",
+            ".gitignore.hbs",
+            ".gitattributes.hbs",
+            ".prettierrc.json.hbs",
+            ".prettierignore.hbs",
+            "eslint.config.mjs.hbs",
+            "README.md.hbs",
+            "@apps/.gitkeep.hbs",
+            "packages/types/package.json.hbs",
+            "packages/types/tsconfig.json",
+            "packages/types/vite.config.ts",
+            "packages/types/src/index.ts",
+            "packages/utils/package.json.hbs",
+            "packages/utils/tsconfig.json",
+            "packages/utils/vite.config.ts",
+            "packages/utils/src/index.ts",
+            "packages/utils/src/services/guid-generator/guidGenerator.ts",
+            "packages/vue-utils/package.json.hbs",
+            "packages/vue-utils/tsconfig.json",
+            "packages/vue-utils/vite.config.ts",
+            "packages/vue-utils/src/index.ts",
+            "packages/vue-utils/src/i18n.ts"
+         ],
+         "dependencias": {
+            "turbo": "^2.5.8",
+            "typescript": "~5.9.3",
+            "vite": "^7.1.10",
+            "vite-plugin-dts": "^4.5.4",
+            "vue": "^3.5.22",
+            "vue-tsc": "^3.1.1",
+            "vitest": "^3.2.4",
+            "i18next": "^25.6.0"
+         }
+      },
       "microfrontend-integrado": {
+         "descripcion": "Microfrontend que se integra en aplicaciones ASP.NET",
          "archivos": [
             "public/locales/en-US/translation.json.hbs",
             "public/locales/es-MX/translation.json.hbs",
@@ -14,8 +56,6 @@
             "src/global.ts.hbs",
             "src/main.ts.hbs",
             "src/vite-env.d.ts.hbs",
-            ".env.development.hbs",
-            ".env.production.hbs",
             "index.html.hbs",
             "package.json.hbs",
             "tsconfig.app.json.hbs",
@@ -25,6 +65,7 @@
          ]
       },
       "microfrontend-independiente": {
+         "descripcion": "Microfrontend independiente (SPA)",
          "archivos": [
             "public/locales/en-US/translation.json.hbs",
             "public/locales/es-MX/translation.json.hbs",
@@ -35,8 +76,6 @@
             "src/global.ts.hbs",
             "src/main.ts.hbs",
             "src/vite-env.d.ts.hbs",
-            ".env.development.hbs",
-            ".env.production.hbs",
             "index.html.hbs",
             "package.json.hbs",
             "tsconfig.app.json.hbs",
@@ -46,22 +85,53 @@
          ]
       },
       "libreria-vue": {
+         "descripcion": "Librería con componentes Vue reutilizables",
          "archivos": [
             "src/i18n.ts.hbs",
             "src/index.ts.hbs",
             "package.json.hbs",
             "tsconfig.json.hbs",
             "vite.config.ts.hbs"
-         ]
+         ],
+         "configuracion": {
+            "tsconfig": "Usa configs/lib-vue.tsconfig.jsonc como base",
+            "vite": "Configura vite-plugin-dts con rollupTypes: false",
+            "exports": "Soporta múltiples entry points (index, i18n, CSS)"
+         }
       },
       "libreria-utils": {
+         "descripcion": "Librería de utilidades JavaScript/TypeScript",
          "archivos": [
-            "services/guid-generator/guidGenerator.ts.hbs",
+            "src/services/guid-generator/guidGenerator.ts.hbs",
             "src/index.ts.hbs",
             "package.json.hbs",
             "tsconfig.json.hbs",
             "vite.config.ts.hbs"
-         ]
+         ],
+         "configuracion": {
+            "tsconfig": "Usa configs/lib.tsconfig.jsonc como base",
+            "vite": "Configura vite-plugin-dts con rollupTypes: false",
+            "exports": "Entry point único en dist/index.js"
+         }
       }
+   },
+   "configuraciones": {
+      "tsconfig": {
+         "base": "configs/",
+         "tipos": {
+            "lib.tsconfig.jsonc": "Para librerías TypeScript puras",
+            "lib-vue.tsconfig.jsonc": "Para librerías Vue",
+            "app-vue.tsconfig.jsonc": "Para aplicaciones Vue"
+         }
+      },
+      "caracteristicas": [
+         "Turborepo para builds optimizados",
+         "pnpm catalog para versionado centralizado",
+         "TypeScript con configuraciones específicas por tipo",
+         "vite-plugin-dts para generación de tipos",
+         "ESLint y Prettier configurados",
+         "Vitest para testing",
+         "i18next para internacionalización"
+      ]
    }
 }

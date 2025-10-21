@@ -1,0 +1,23 @@
+{
+   "extends": "@vue/tsconfig/tsconfig.dom.json",
+   "compilerOptions": {
+      // Build info
+      "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+      // Paths - alias de importación
+      "baseUrl": "./",
+      "paths": {
+         "@/*": ["./src/*"]
+      },
+
+      // Strict Mode - calidad de código
+      "strict": true,
+      "noUncheckedIndexedAccess": false,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noFallthroughCasesInSwitch": true,
+      "erasableSyntaxOnly": true,
+      "noUncheckedSideEffectImports": true
+   },
+   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+}

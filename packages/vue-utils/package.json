@@ -10,20 +10,33 @@
       ".": {
          "import": "./dist/index.js",
          "types": "./dist/index.d.ts"
-      }
+      },
+      "./i18n": {
+         "import": "./dist/i18n/index.js",
+         "types": "./dist/i18n/index.d.ts"
+      },
+      "./style.css": "./dist/style.css",
+      "./package.json": "./package.json"
    },
    "files": [
       "dist"
    ],
    "scripts": {
-      "build": "npm run format && npm run lint && vue-tsc -b && vite build",
-      "builddev": "npm run format && npm run lint && vue-tsc -b && vite build --mode development",
+      "build": "pnpm format && pnpm lint && vue-tsc -b && vite build",
+      "builddev": "pnpm format && pnpm lint && vue-tsc -b && vite build --mode development",
       "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
       "format": "prettier --write ."
    },
-   "dependencies": {},
+   "dependencies": {
+      "@pnpmworkspace/types": "workspace:*"
+   },
+   "devDependencies": {
+      "i18next": "catalog:",
+      "i18next-http-backend": "catalog:",
+      "i18next-vue": "catalog:",
+      "vue": "catalog:"
+   },
    "peerDependencies": {
-      "@pnpmworkspace/types": "workspace:*",
       "i18next": "catalog:",
       "i18next-http-backend": "catalog:",
       "i18next-vue": "catalog:",

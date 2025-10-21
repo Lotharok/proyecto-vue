@@ -1,31 +1,47 @@
 {
    "extends": "@vue/tsconfig/tsconfig.dom.json",
    "compilerOptions": {
-      "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-      "strict": true,
+      // Build optimization
+      "incremental": true,
+      "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.{{kebabCase name}}.tsbuildinfo",
+      "composite": true,
+
+      // Target y Module - configuración para librerías Vue modernas
       "target": "ES2020",
       "lib": ["ES2020", "DOM", "DOM.Iterable"],
       "module": "ESNext",
+
+      // Module Resolution - CRÍTICO para librerías con Vite
+      "moduleResolution": "bundler",
+      "resolveJsonModule": true,
+
+      // Emisión de archivos
+      // TypeScript: solo type-checking (Vite compila el código)
+      // vite-plugin-dts: genera archivos .d.ts automáticamente
+      "noEmit": true,
+      "declaration": true,
+      "declarationMap": true,
+      "emitDeclarationOnly": false,
+
+      // Interoperabilidad
       "skipLibCheck": true,
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
-      "moduleResolution": "bundler",
-      "allowImportingTsExtensions": true,
+
+      // Vue y JSX
+      "jsx": "preserve",
       "isolatedModules": true,
       "verbatimModuleSyntax": true,
-      "jsx": "preserve",
-      "declaration": true,
-      "declarationMap": true,
-      "outDir": "./dist",
-      "rootDir": "./src",
 
-      // Strict Mode
+      // Strict Mode - calidad de código
+      "strict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "noFallthroughCasesInSwitch": true,
       "exactOptionalPropertyTypes": true,
+      "noUncheckedIndexedAccess": true,
 
-      // Paths
+      // Paths - alias de importación
       "baseUrl": "./",
       "paths": {
          "@": ["./src"],
@@ -33,5 +49,5 @@
       }
    },
    "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.tsx"],
-   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts", "**/*.story.vue"]
 }

@@ -24,17 +24,24 @@ export default defineConfig(({ mode }) => {
          },
       },
 
-      base: env.VITE_CDN_BASE_URL || "/",
+      base: env.VITE_CDN_BASE_URL ?? "/",
 
       build: {
          target: "es2020",
          minify: !isDebug,
-         sourcemap: isDebug,
+         sourcemap: mode === "production" ? "hidden" : true,
 
          rollupOptions: {
+            // Tree-shaking agresivo
+            treeshake: {
+               preset: "recommended",
+               moduleSideEffects: "no-external",
+            },
+
             output: {
                entryFileNames: "{{kebabCase name}}.js",
                chunkFileNames: "[name]-[hash].js",
+               assetFileNames: "[name][extname]",
 
                manualChunks: (id) => {
                   if (useMocks && id.includes("/mocks/")) {

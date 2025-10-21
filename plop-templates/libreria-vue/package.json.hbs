@@ -25,6 +25,17 @@
    "dependencies": {
       "@pnpmworkspace/types": "workspace:*"
    },
+   "devDependencies": {
+      {{#if usesI18n}}
+      "i18next": "catalog:",
+      "i18next-http-backend": "catalog:",
+      "i18next-vue": "catalog:",
+      {{/if}}
+      {{#if usesPinia}}
+      "pinia": "catalog:",
+      {{/if}}
+      "vue": "catalog:",
+   },
    "peerDependencies": {
       {{#if usesI18n}}
       "i18next": "catalog:",
