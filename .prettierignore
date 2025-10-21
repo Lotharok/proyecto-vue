@@ -1,12 +1,45 @@
-# Ignore artifacts:
-build
-coverage
-node_modules
-plop-templates
+# Build outputs
+dist/
+dist-ssr/
+coverage/
 
+plop-templates/
+
+# Dependencies  
+node_modules/
+.pnpm-store/
+
+# Logs
+*.log
+
+# Environment files
+.env*
+
+# Cache and temp files
+.cache/
+.temp/
+.tmp/
+*.tsbuildinfo
+
+# Generated files
+auto-generated/
+generated/
+
+# Lock files (don't format)
+package-lock.json
+yarn.lock
 pnpm-lock.yaml
-pnpm-workspace.yaml
 
-**/.git
-**/node_modules
-**/dist
+# Config files that should not be formatted
+.vscode/
+.idea/
+
+# Binary files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.pdf
+*.zip
+*.tar.gz

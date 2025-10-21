@@ -1,36 +1,51 @@
 {
    "compilerOptions": {
-      "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-      "strict": true,
+      // Build optimization
+      "incremental": true,
+      "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
+      "composite": true,
+
+      // Target y Module - configuración para librerías modernas
       "target": "ES2020",
       "lib": ["ES2020", "DOM", "DOM.Iterable"],
       "module": "ESNext",
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "noEmit": true,
+
+      // Module Resolution - CRÍTICO para librerías
       "moduleResolution": "bundler",
-      "allowImportingTsExtensions": true,
-      "isolatedModules": true,
-      "verbatimModuleSyntax": true,
+      "resolveJsonModule": true,
+
+      // Emisión de archivos - la librería genera .js y .d.ts
+      // IMPORTANTE: NO usar "noEmit" aquí porque esta es una librería
       "declaration": true,
       "declarationMap": true,
+      "sourceMap": true,
       "outDir": "./dist",
       "rootDir": "./src",
 
+      // Bundler-specific
+      "isolatedModules": true,
+      "verbatimModuleSyntax": true,
+
+      // Interop
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+
       // Strict Mode
+      "strict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "noFallthroughCasesInSwitch": true,
       "exactOptionalPropertyTypes": true,
+      "noUncheckedIndexedAccess": true,
 
-      // Paths para dependencies internas
+      // Path aliases
       "baseUrl": "./",
       "paths": {
          "@": ["./src"],
          "@/*": ["./src/*"]
       }
    },
-   "include": ["src/**/*"],
+   "include": ["src/**/*.ts"],
    "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

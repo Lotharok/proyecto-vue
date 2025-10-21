@@ -1,36 +1,51 @@
 {
    "compilerOptions": {
-      "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-      "strict": true,
+      // Build optimization
+      "incremental": true,
+      "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.{{kebabCase name}}.tsbuildinfo",
+      "composite": true,
+
+      // Target y Module - configuración para librerías modernas
       "target": "ES2020",
       "lib": ["ES2020", "DOM", "DOM.Iterable"],
       "module": "ESNext",
+
+      // Module Resolution - CRÍTICO para librerías con Vite
+      "moduleResolution": "bundler",
+      "resolveJsonModule": true,
+
+      // Emisión de archivos
+      // TypeScript: solo type-checking (Vite compila el código)
+      // vite-plugin-dts: genera archivos .d.ts automáticamente
+      "noEmit": true,
+      "declaration": true,
+      "declarationMap": true,
+      "emitDeclarationOnly": false,
+
+      // Bundler-specific
+      "isolatedModules": true,
+      "verbatimModuleSyntax": true,
+
+      // Interop
       "skipLibCheck": true,
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
-      "noEmit": true,
-      "moduleResolution": "bundler",
-      "allowImportingTsExtensions": true,
-      "isolatedModules": true,
-      "verbatimModuleSyntax": true,
-      "declaration": true,
-      "declarationMap": true,
-      "outDir": "./dist",
-      "rootDir": "./src",
 
       // Strict Mode
+      "strict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "noFallthroughCasesInSwitch": true,
       "exactOptionalPropertyTypes": true,
+      "noUncheckedIndexedAccess": true,
 
-      // Paths para dependencies internas
+      // Path aliases
       "baseUrl": "./",
       "paths": {
          "@": ["./src"],
          "@/*": ["./src/*"]
       }
    },
-   "include": ["src/**/*"],
+   "include": ["src/**/*.ts"],
    "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

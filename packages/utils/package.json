@@ -10,10 +10,6 @@
       ".": {
          "import": "./dist/index.js",
          "types": "./dist/index.d.ts"
-      },
-      "./http": {
-         "import": "./dist/services/http/index.js",
-         "types": "./dist/services/http/index.d.ts"
       }
    },
    "files": [

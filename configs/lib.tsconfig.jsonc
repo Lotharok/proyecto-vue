@@ -2,7 +2,9 @@
    "compilerOptions": {
       // Build optimization
       "incremental": true,
-      "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.types.tsbuildinfo",
+      // IMPORTANTE: Usar nombre único por paquete para evitar colisiones en monorepos
+      // Ejemplo: "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.my-package.tsbuildinfo"
+      "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
       "composite": true,
 
       // Target y Module - configuración para librerías modernas
@@ -10,17 +12,17 @@
       "lib": ["ES2020", "DOM", "DOM.Iterable"],
       "module": "ESNext",
 
-      // Module Resolution - CRÍTICO para librerías con Vite
+      // Module Resolution - CRÍTICO para librerías
       "moduleResolution": "bundler",
       "resolveJsonModule": true,
 
-      // Emisión de archivos
-      // TypeScript: solo type-checking (Vite compila el código)
-      // vite-plugin-dts: genera archivos .d.ts automáticamente
-      "noEmit": true,
+      // Emisión de archivos - la librería genera .js y .d.ts
+      // IMPORTANTE: NO usar "noEmit" aquí porque esta es una librería
       "declaration": true,
       "declarationMap": true,
-      "emitDeclarationOnly": false,
+      "sourceMap": true,
+      "outDir": "./dist",
+      "rootDir": "./src",
 
       // Bundler-specific
       "isolatedModules": true,

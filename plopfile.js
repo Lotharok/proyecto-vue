@@ -80,13 +80,13 @@ module.exports = function (plop) {
             type: "input",
             name: "cdnTestUrl",
             message: "URL del CDN de pruebas (opcional):",
-            default: "https://test-b2b2c.cdnpt.com",
+            default: "https://test-organization.cdn.com",
          },
          {
             type: "input",
             name: "cdnUrl",
             message: "URL del CDN de producción (opcional):",
-            default: "https://b2b2c.cdnpt.com",
+            default: "https://organization.cdn.com",
          },
       ],
       actions: [
@@ -130,13 +130,13 @@ module.exports = function (plop) {
             type: "input",
             name: "cdnTestUrl",
             message: "URL del CDN de pruebas (opcional):",
-            default: "https://test-b2b2c.cdnpt.com",
+            default: "https://test-organization.cdn.com",
          },
          {
             type: "input",
             name: "cdnUrl",
             message: "URL del CDN de producción (opcional):",
-            default: "https://b2b2c.cdnpt.com",
+            default: "https://organization.cdn.com",
          },
       ],
       actions: [
@@ -350,6 +350,12 @@ module.exports = function (plop) {
             type: "add",
             path: "{{kebabCase projectName}}/.prettierignore",
             templateFile: "plop-templates/proyecto-completo/.prettierignore.hbs",
+         });
+
+         actions.push({
+            type: "add",
+            path: "{{kebabCase projectName}}/turbo.json",
+            templateFile: "plop-templates/proyecto-completo/turbo.json.hbs",
          });
 
          // 2. Estructura de carpetas

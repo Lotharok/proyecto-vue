@@ -1,6 +1,6 @@
 import path from "path";
-import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
    build: {
@@ -22,10 +22,10 @@ export default defineConfig({
    plugins: [
       dts({
          include: ["src/**/*"],
-         exclude: ["**/*.test.ts", "**/*.spec.ts", "src/test-utils/**/*"],
+         exclude: ["**/*.test.ts", "**/*.spec.ts"],
          insertTypesEntry: true,
          copyDtsFiles: true,
-         rollupTypes: true,
+         rollupTypes: false,
       }),
    ],
    resolve: {

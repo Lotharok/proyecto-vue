@@ -1,7 +1,10 @@
 {
+   "extends": "@vue/tsconfig/tsconfig.dom.json",
    "compilerOptions": {
       // Build optimization
       "incremental": true,
+      // IMPORTANTE: Usar nombre único por paquete para evitar colisiones en monorepos
+      // Ejemplo: "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.my-vue-package.tsbuildinfo"
       "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
       "composite": true,
 
@@ -22,16 +25,17 @@
       "outDir": "./dist",
       "rootDir": "./src",
 
-      // Bundler-specific
-      "isolatedModules": true,
-      "verbatimModuleSyntax": true,
-
-      // Interop
+      // Interoperabilidad
       "skipLibCheck": true,
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
 
-      // Strict Mode
+      // Vue y JSX
+      "jsx": "preserve",
+      "isolatedModules": true,
+      "verbatimModuleSyntax": true,
+
+      // Strict Mode - calidad de código
       "strict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
@@ -39,13 +43,13 @@
       "exactOptionalPropertyTypes": true,
       "noUncheckedIndexedAccess": true,
 
-      // Path aliases
+      // Paths - alias de importación
       "baseUrl": "./",
       "paths": {
          "@": ["./src"],
          "@/*": ["./src/*"]
       }
    },
-   "include": ["src/**/*.ts"],
-   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+   "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.tsx"],
+   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts", "**/*.story.vue"]
 }
